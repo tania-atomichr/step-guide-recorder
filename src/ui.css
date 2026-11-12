@@ -1,0 +1,64 @@
+/* The extension's own pages share this. Change the colours here to restyle
+   them; the panel on the page has its own copy of --accent in page.js. */
+:root {
+  --accent: #4f46e5; --accent-ink: #3730a3; --accent-soft: #eef0ff;
+  --ink: #0f172a; --soft: #5b6474; --line: #e5e7eb; --bg: #f6f6fa; --card: #fff;
+  --good: #15803d; --good-soft: #e9f7ef; --bad: #b42318; --bad-soft: #fdecea;
+  --radius: 16px; --shadow: 0 1px 2px rgba(15, 23, 42, .05), 0 4px 16px rgba(15, 23, 42, .05);
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--ink); background: var(--bg); }
+[hidden] { display: none !important; }
+a { color: inherit; }
+a, button, input, select, textarea { font: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent); }
+h1 { font-size: 28px; line-height: 1.2; margin: 0; font-weight: 700; letter-spacing: -.01em; }
+h2 { font-size: 17px; margin: 0 0 10px; font-weight: 650; }
+p { margin: 0; }
+.muted { color: var(--soft); }
+svg { display: block; flex: none; }
+
+/* the strip across the top of every page */
+.brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 920px; margin: 0 auto; padding: 18px 16px 0; }
+.brand a.home { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 650; }
+.brand img { width: 28px; height: 28px; }
+.nav { display: flex; gap: 4px; }
+.nav a { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; text-decoration: none; color: var(--soft); font-size: 14px; font-weight: 600; }
+.nav a:hover { background: var(--card); color: var(--ink); }
+.nav a.on { background: var(--card); color: var(--ink); box-shadow: var(--shadow); }
+
+.wrap { max-width: 920px; margin: 0 auto; padding: 24px 16px 64px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 999px; background: var(--ink);
+        color: #fff; font-weight: 600; font-size: 14.5px; line-height: 1; padding: 11px 16px; cursor: pointer; text-decoration: none; white-space: nowrap; }
+.pill:hover { background: #1e293b; }
+.pill.accent { background: var(--accent); }
+.pill.accent:hover { background: var(--accent-ink); }
+.pill.line { background: var(--card); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.pill.line:hover { box-shadow: inset 0 0 0 1px var(--ink); }
+.pill.danger { background: var(--card); color: var(--bad); box-shadow: inset 0 0 0 1px var(--line); }
+.pill.danger:hover { box-shadow: inset 0 0 0 1px var(--bad); }
+.pill:disabled { opacity: .45; cursor: default; }
+
+/* small facts: 7 steps, a date, sent */
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: var(--bg); color: var(--soft);
+        font-size: 13px; font-weight: 600; line-height: 1.2; }
+.chip svg { width: 15px; height: 15px; }
+.chip.accent { background: var(--accent-soft); color: var(--accent-ink); }
+.chip.good { background: var(--good-soft); color: var(--good); }
+.chip.bad { background: var(--bad-soft); color: var(--bad); }
+
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.note { display: flex; gap: 10px; align-items: flex-start; border-radius: 12px; background: var(--accent-soft); color: var(--accent-ink); padding: 12px 14px; font-size: 14px; }
+.note svg { margin-top: 1px; }
+.note a { font-weight: 600; }
+.note.bad { background: var(--bad-soft); color: var(--bad); }
+.note.good { background: var(--good-soft); color: var(--good); }
+
+.field { display: grid; gap: 6px; margin-bottom: 16px; }
+.field label { font-weight: 600; font-size: 14px; }
+.field input, .field select { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px; background: #fff; color: var(--ink); }
+.field input:focus, .field select:focus { border-color: var(--accent); }
+.field small { color: var(--soft); font-size: 13px; }

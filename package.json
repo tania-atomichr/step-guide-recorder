@@ -1,0 +1,13 @@
+{
+  "name": "step-guide-recorder",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome extension: click through a task once, get a step-by-step guide with a picture of each step.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node test/e2e.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0"
+  }
+}

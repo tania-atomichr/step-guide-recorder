@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Step Guide Recorder",
+  "short_name": "Step Guide",
+  "version": "0.1.0",
+  "description": "Click through a task once and get a step-by-step guide with a picture of each step. Kept in your browser; send it anywhere you choose.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "Step Guide Recorder",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "unlimitedStorage",
+    "alarms"
+  ],
+  "optional_host_permissions": [
+    "<all_urls>"
+  ]
+}
