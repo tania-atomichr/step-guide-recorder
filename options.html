@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings</title>
+<link rel="stylesheet" href="src/ui.css">
+<style>
+  .wrap { max-width: 660px; }
+  .check input { width: 18px; height: 18px; accent-color: var(--accent); }
+  h1 { margin-bottom: 6px; }
+  .lead { margin-bottom: 24px; }
+  .check { display: flex; gap: 10px; align-items: center; margin-bottom: 18px; font-weight: 600; font-size: 14px; }
+  #saved { margin-top: 14px; }
+</style>
+</head>
+<body>
+<header class="brand">
+  <a class="home" href="library.html"><img src="icons/icon-48.png" alt="">Step Guide Recorder</a>
+  <nav class="nav"><a href="library.html"><i data-icon="steps"></i>My guides</a><a class="on" href="options.html"><i data-icon="cog"></i>Settings</a></nav>
+</header>
+<div class="wrap">
+  <h1>Where guides go</h1>
+  <p class="muted lead">Guides are always kept in this browser first, and can be downloaded from each guide's page. Choose a destination to also send each finished guide to another system.</p>
+  <form id="form" class="card" style="padding:22px 24px">
+    <div class="field"><label for="dest">Send finished guides to</label><select id="dest"></select></div>
+    <div id="fields"></div>
+    <label class="check" id="autoRow"><input type="checkbox" id="auto"> Send each guide as soon as I finish it</label>
+    <button class="pill accent" type="submit">Save</button>
+    <p class="note" id="saved" hidden></p>
+  </form>
+</div>
+<script src="src/icons.js"></script>
+<script src="src/destinations.js"></script>
+<script src="src/options.js"></script>
+</body>
+</html>

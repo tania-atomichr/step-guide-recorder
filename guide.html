@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide</title>
+<link rel="stylesheet" href="src/ui.css">
+<style>
+  .hero { padding: 22px 24px; margin-bottom: 22px; }
+  .title { width: 100%; border: 1px solid transparent; border-radius: 10px; padding: 4px 8px; margin: 0 0 10px -9px;
+           font-size: 28px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; color: var(--ink); background: transparent;
+           resize: none; overflow: hidden; display: block; }
+  .title:hover, .title:focus { border-color: var(--line); background: var(--bg); }
+  .hero .bar.facts { margin-bottom: 18px; }
+  #sendnote { margin-top: 16px; }
+  ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; counter-reset: s; }
+  li.step { padding: 16px; }
+  .head { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 12px; align-items: start; margin-bottom: 12px; }
+  .num { width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 15px; }
+  .say { width: 100%; border: 1px solid transparent; border-radius: 10px; padding: 5px 8px; margin-left: -8px; font-size: 16px; font-weight: 600; color: var(--ink);
+         background: transparent; resize: none; overflow: hidden; display: block; line-height: 1.4; }
+  .say:hover, .say:focus { border-color: var(--line); background: var(--bg); }
+  .out { display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; color: var(--soft); font-size: 13.5px; font-weight: 600;
+         cursor: pointer; padding: 7px 10px; border-radius: 999px; }
+  .out:hover { color: var(--bad); background: var(--bad-soft); }
+  .out svg { width: 16px; height: 16px; }
+  .pic { position: relative; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--bg); }
+  .pic img { display: block; width: 100%; height: auto; }
+  .ring { position: absolute; border: 3px solid var(--accent); border-radius: 8px; box-shadow: 0 0 0 5px rgba(79, 70, 229, .22); pointer-events: none; }
+  .pic img.over { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .pic img.f, .ring { transition: opacity .25s; }
+  .tag { position: absolute; left: 10px; bottom: 10px; background: rgba(15, 23, 42, .78); color: #fff; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 3px 9px; }
+  .where { margin-top: 10px; max-width: 100%; }
+  .where span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  @media (max-width: 520px) {
+    .hero { padding: 18px 16px; }
+    .title { font-size: 23px; }
+    .head { grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; }
+    .num { width: 30px; height: 30px; font-size: 14px; }
+    .out span { display: none; }
+    .bar.acts .pill { flex: 1 1 auto; }
+  }
+</style>
+</head>
+<body>
+<header class="brand">
+  <a class="home" href="library.html"><img src="icons/icon-48.png" alt="">Step Guide Recorder</a>
+  <nav class="nav"><a href="library.html"><i data-icon="steps"></i>My guides</a><a href="options.html"><i data-icon="cog"></i>Settings</a></nav>
+</header>
+<div class="wrap">
+  <p class="note" id="missing" hidden>This guide is not in this browser any more.</p>
+  <div id="page" hidden>
+    <section class="card hero">
+      <textarea class="title" id="title" rows="1" aria-label="Title"></textarea>
+      <div class="bar facts" id="facts"></div>
+      <div class="bar acts">
+        <button class="pill accent" id="html" type="button"><i data-icon="download"></i>Download as a web page</button>
+        <button class="pill line" id="json" type="button"><i data-icon="code"></i>Download as JSON</button>
+        <button class="pill line" id="send" type="button" hidden><i data-icon="send"></i><span>Send</span></button>
+        <button class="pill danger" id="del" type="button"><i data-icon="trash"></i>Delete</button>
+      </div>
+      <div class="note" id="sendnote" hidden></div>
+    </section>
+    <ol id="steps"></ol>
+  </div>
+</div>
+<script src="src/icons.js"></script>
+<script src="src/store.js"></script>
+<script src="src/format.js"></script>
+<script src="src/destinations.js"></script>
+<script src="src/clip.js"></script>
+<script src="src/export.js"></script>
+<script src="src/guide-page.js"></script>
+</body>
+</html>

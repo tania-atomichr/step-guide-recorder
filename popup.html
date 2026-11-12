@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Step Guide Recorder</title>
+<link rel="stylesheet" href="src/ui.css">
+<style>
+  body { width: 320px; background: var(--card); }
+  .w { padding: 16px; display: grid; gap: 14px; }
+  .top { display: flex; align-items: center; gap: 10px; font-weight: 650; }
+  .top img { width: 28px; height: 28px; }
+  .box { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; padding: 14px; border-radius: 14px; background: var(--accent-soft); }
+  .box .ic { width: 44px; height: 44px; border-radius: 12px; background: var(--accent); color: #fff; display: grid; place-items: center; }
+  .box b { display: block; font-size: 15px; }
+  .box span { display: block; font-size: 13px; color: var(--soft); line-height: 1.4; }
+  .go { width: 100%; padding: 13px 16px; font-size: 15px; }
+  .big { font-size: 34px; font-weight: 700; line-height: 1; color: var(--accent); }
+  .links { display: flex; gap: 4px; margin: 0 -6px; }
+  .links a { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; text-decoration: none; color: var(--soft); font-size: 13.5px; font-weight: 600; }
+  .links a:hover { background: var(--bg); color: var(--ink); }
+  .links svg { width: 16px; height: 16px; }
+</style>
+</head>
+<body>
+<div class="w">
+  <div class="top"><img src="icons/icon-48.png" alt="">Step Guide Recorder</div>
+
+  <div id="idle" class="w" style="padding:0">
+    <div class="box"><span class="ic"><i data-icon="cursor"></i></span>
+      <div><b>Click through it once</b><span>Each click becomes a step with a picture of the page.</span></div></div>
+    <button class="pill accent go" id="start" type="button">Start a guide on this tab</button>
+  </div>
+
+  <div id="live" class="w" style="padding:0" hidden>
+    <div class="box"><span class="big" id="count">0</span><div><b id="countword">steps so far</b><span id="say"></span></div></div>
+    <button class="pill go" id="finish" type="button">Finish guide</button>
+    <button class="pill line go" id="show" type="button" hidden>Go to the guide's tab</button>
+  </div>
+
+  <p class="note bad" id="tell" hidden></p>
+  <div class="links"><a href="library.html" target="_blank"><i data-icon="steps"></i>My guides</a><a href="options.html" target="_blank"><i data-icon="cog"></i>Settings</a></div>
+</div>
+<script src="src/icons.js"></script>
+<script src="src/popup.js"></script>
+</body>
+</html>

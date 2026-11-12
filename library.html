@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My guides</title>
+<link rel="stylesheet" href="src/ui.css">
+<style>
+  .head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  li a { display: grid; grid-template-rows: auto 1fr; height: 100%; overflow: hidden; text-decoration: none; transition: transform .15s, box-shadow .15s; }
+  li a:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(15,23,42,.06), 0 10px 28px rgba(15,23,42,.1); }
+  .thumb { aspect-ratio: 16 / 10; background: var(--accent-soft); border-bottom: 1px solid var(--line); overflow: hidden; display: grid; place-items: center; color: var(--accent); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+  .thumb svg { width: 32px; height: 32px; }
+  .body { padding: 14px 16px 16px; display: grid; gap: 10px; align-content: start; }
+  .body b { font-weight: 650; font-size: 16px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .empty { padding: 32px 24px; display: grid; gap: 14px; justify-items: start; }
+  .empty .ic { width: 48px; height: 48px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; }
+  .empty ol { margin: 0; padding-left: 20px; color: var(--soft); display: grid; gap: 4px; }
+</style>
+</head>
+<body>
+<header class="brand">
+  <a class="home" href="library.html"><img src="icons/icon-48.png" alt="">Step Guide Recorder</a>
+  <nav class="nav"><a class="on" href="library.html"><i data-icon="steps"></i>My guides</a><a href="options.html"><i data-icon="cog"></i>Settings</a></nav>
+</header>
+<div class="wrap">
+  <div class="head"><h1>My guides</h1><span class="muted" id="n"></span></div>
+  <div class="card empty" id="empty" hidden>
+    <span class="ic"><i data-icon="cursor"></i></span>
+    <h2 style="margin:0">Make your first guide</h2>
+    <ol><li>Open the page you want to explain.</li><li>Press this extension's icon and choose Start a guide.</li><li>Click through the task. Each click becomes a step.</li></ol>
+  </div>
+  <ul id="list"></ul>
+</div>
+<script src="src/icons.js"></script>
+<script src="src/store.js"></script>
+<script src="src/format.js"></script>
+<script src="src/library.js"></script>
+</body>
+</html>
