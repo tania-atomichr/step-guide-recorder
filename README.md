@@ -1,16 +1,56 @@
-# Step Guide Recorder
+<p align="center"><img src="icons/icon-128.png" width="72" alt=""></p>
 
-[![Test](https://github.com/tania-atomichr/step-guide-recorder/actions/workflows/test.yml/badge.svg)](https://github.com/tania-atomichr/step-guide-recorder/actions/workflows/test.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+<h1 align="center">Step Guide Recorder</h1>
 
-A Chrome extension that turns clicking through a task into a step-by-step
-guide. Each click becomes a step: a plain sentence ("Click "Save changes".")
-and a picture of the page with the clicked thing ringed.
+<p align="center">
+  <b>Click through a task once. Get a step-by-step guide with a picture of every step.</b><br>
+  A free, open source Chrome extension. No account, no server: your guides stay in your browser.
+</p>
 
-It works on its own, with no account and no server. Guides are kept in your
-browser and can be downloaded as a single web page or as JSON. When you want
-them to land in another system, you point it at that system in one place
-(see [Connecting it to your own system](#connecting-it-to-your-own-system)).
+<p align="center">
+  <a href="https://github.com/tania-atomichr/step-guide-recorder/actions/workflows/test.yml"><img src="https://github.com/tania-atomichr/step-guide-recorder/actions/workflows/test.yml/badge.svg" alt="Test"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT licence"></a>
+  <img src="https://img.shields.io/badge/Chrome-Manifest%20V3-4f46e5.svg" alt="Chrome Manifest V3">
+  <img src="https://img.shields.io/badge/build%20step-none-555.svg" alt="No build step">
+</p>
+
+<p align="center"><img src="docs/demo.gif" width="800" alt="Starting a guide, clicking through a demo site, a step that plays a short clip, and the finished guide"></p>
+
+## Why use it
+
+| | |
+|---|---|
+| **Fast** | Do the task once. Each click becomes a numbered step with a sentence ("Click "Save changes".") and a picture with the clicked thing ringed. |
+| **Private** | No account, no analytics, no server. Typing is never recorded and password fields are painted out. See [PRIVACY.md](PRIVACY.md). |
+| **Moving steps** | When a click opens a menu, scrolls or drags something, that step gets a short clip. The extension decides on its own. |
+| **Easy to share** | Download a guide as one web page that opens anywhere, or as JSON. |
+| **Yours to connect** | Send finished guides to your own app or API by changing one file. A webhook works out of the box. |
+| **Easy to change** | Plain JavaScript, no dependencies, no build step. MIT licence. |
+
+Good for how-to guides, onboarding, support answers, bug reports and
+internal handbooks, and as a starting point for your own guide tool.
+
+## Quick start
+
+1. **Get the code:** press the green **Code** button above, then
+   **Download ZIP**, and unzip it. (Or `git clone` this repository.)
+2. Open `chrome://extensions` in Chrome and turn on **Developer mode** (top right).
+3. Press **Load unpacked** and pick the unzipped folder.
+4. Pin the extension, open any web page, press its icon and choose
+   **Start a guide on this tab**.
+5. Click through your task, then press **Finish guide** on the panel.
+
+Tested in Chrome. It should also work in other Chromium browsers such as Edge and Brave, but they are not tested yet.
+
+## Contents
+
+- [What a finished guide looks like](#what-a-finished-guide-looks-like)
+- [What it does](#what-it-does) and [Privacy](#privacy)
+- [Connecting it to your own system](#connecting-it-to-your-own-system)
+- [How a clip is decided](#how-a-clip-is-decided)
+- [The guide format](#the-guide-format)
+- [How it is built](#how-it-is-built) and [Test](#test)
+- [Contributing](#contributing)
 
 ## What a finished guide looks like
 
@@ -73,14 +113,6 @@ It looks the same and opens anywhere, with no extension and no server:
 - **Pictures show what is on screen.** Text already typed into ordinary
   fields, names and other details on the page appear in the pictures. Look
   through a guide before you share it.
-
-## Install (developer mode)
-
-1. Download or clone this repository.
-2. Open `chrome://extensions` and turn on **Developer mode** (top right).
-3. Press **Load unpacked** and pick the repository folder.
-4. Pin the extension, open any web page, press its icon and choose
-   **Start a guide on this tab**.
 
 ## Connecting it to your own system
 
