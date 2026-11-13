@@ -1,5 +1,8 @@
 # Step Guide Recorder
 
+[![Test](https://github.com/tania-atomichr/step-guide-recorder/actions/workflows/test.yml/badge.svg)](https://github.com/tania-atomichr/step-guide-recorder/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A Chrome extension that turns clicking through a task into a step-by-step
 guide. Each click becomes a step: a plain sentence ("Click "Save changes".")
 and a picture of the page with the clicked thing ringed.
@@ -206,6 +209,14 @@ npm test
 Screenshots land in `test/out/`. Pressing the toolbar icon cannot be
 scripted, so the test loads a copy of the extension that is allowed on all
 sites and starts the guide the way the popup does.
+
+## Contributing
+
+Bug reports, ideas and pull requests are welcome. See
+[CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
+Report security problems privately as described in [SECURITY.md](SECURITY.md).
+What the extension stores and sends is in [PRIVACY.md](PRIVACY.md); changes
+between versions are in [CHANGELOG.md](CHANGELOG.md).
 
 ## Licence
 
