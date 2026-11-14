@@ -144,9 +144,21 @@ function ok(msg) { console.log('ok   ' + msg); }
     await view.locator('li.step').nth(6).screenshot({ path: path.join(OUT, 'clip-a.png') });
     await view.waitForTimeout(1600);
     await view.locator('li.step').nth(6).screenshot({ path: path.join(OUT, 'clip-b.png') });
+    fs.writeFileSync(path.join(OUT, 'guide.json'), kept);
+    if (process.env.DOCS) {
+      // frames of the drag step playing, for docs/clip.gif (scripts/make-docs.py)
+      const drag = view.locator('li.step').nth(7);
+      await drag.scrollIntoViewIfNeeded();
+      fs.mkdirSync(path.join(OUT, 'clip-frames'), { recursive: true });
+      for (let i = 0; i < 24; i++) {
+        await drag.locator('.pic').screenshot({ path: path.join(OUT, 'clip-frames', String(i).padStart(2, '0') + '.png') });
+        await view.waitForTimeout(250);
+      }
+    }
 
     await view.screenshot({ path: path.join(OUT, 'guide-1280.png'), fullPage: false });
     await view.setViewportSize({ width: 390, height: 844 });
+    await view.evaluate(() => window.scrollTo(0, 0));
     await view.screenshot({ path: path.join(OUT, 'guide-390.png') });
     await view.setViewportSize({ width: 1280, height: 800 });
 
@@ -157,6 +169,8 @@ function ok(msg) { console.log('ok   ' + msg); }
     await exp.goto('file://' + path.join(OUT, 'export.html'));
     (await exp.$$('li')).length === 9 ? ok('downloaded web page has 9 steps and opens on its own') : fail('export steps');
     await exp.screenshot({ path: path.join(OUT, 'export-1280.png') });
+    await exp.setViewportSize({ width: 390, height: 844 });
+    await exp.screenshot({ path: path.join(OUT, 'export-390.png') });
     await exp.close();
 
     // no destination yet: the page says so and there is no Send

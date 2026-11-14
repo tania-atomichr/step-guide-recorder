@@ -29,7 +29,11 @@ npm test
 
 The test drives the real extension in Chromium against the demo site in
 `test/site/`. Screenshots land in `test/out/` (ignored by git). Every pull
-request runs it on GitHub as well.
+request runs it on GitHub as well. `test/examples.js` checks the example
+webhook receiver in `examples/`.
+
+To redraw the README pictures and the sample guide after a visible change:
+`npm run docs` (needs Pillow). Commit the new pictures with the change.
 
 ## What we look for in a pull request
 

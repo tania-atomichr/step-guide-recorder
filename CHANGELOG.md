@@ -6,6 +6,18 @@ All notable changes are listed here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- `examples/sample-guide.html`: a finished guide to open without installing.
+- `examples/webhook-server.js`: a receiver with no dependencies that saves
+  each guide as a folder of pictures, JSON and a README, with its own test.
+- `scripts/make-docs.py` and `npm run docs` redraw every README picture from
+  the test; the README shows a clip playing and phone screenshots.
+
+### Fixed
+
+- On a phone, the menu at the top of the extension's pages stays on one line.
+
 ## [0.1.0] - 2026-11-13
 
 ### Added

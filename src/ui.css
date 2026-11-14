@@ -23,8 +23,10 @@ svg { display: block; flex: none; }
 .brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 920px; margin: 0 auto; padding: 18px 16px 0; }
 .brand a.home { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 650; }
 .brand img { width: 28px; height: 28px; }
+/* on a phone the name would push the menu onto two lines; the icon still leads home */
+@media (max-width: 480px) { .brand a.home { font-size: 0; } }
 .nav { display: flex; gap: 4px; }
-.nav a { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; text-decoration: none; color: var(--soft); font-size: 14px; font-weight: 600; }
+.nav a { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; text-decoration: none; color: var(--soft); font-size: 14px; font-weight: 600; white-space: nowrap; }
 .nav a:hover { background: var(--card); color: var(--ink); }
 .nav a.on { background: var(--card); color: var(--ink); box-shadow: var(--shadow); }
 

@@ -40,16 +40,21 @@ internal handbooks, and as a starting point for your own guide tool.
    **Start a guide on this tab**.
 5. Click through your task, then press **Finish guide** on the panel.
 
+**Just want to see a finished guide?** Download
+[`examples/sample-guide.html`](examples/sample-guide.html) (press the
+download icon on that page) and open it in any browser. It is what
+**Download as a web page** gives you, made on the demo site.
+
 Tested in Chrome. It should also work in other Chromium browsers such as Edge and Brave, but they are not tested yet.
 
 ## Contents
 
 - [What a finished guide looks like](#what-a-finished-guide-looks-like)
-- [What it does](#what-it-does) and [Privacy](#privacy)
-- [Connecting it to your own system](#connecting-it-to-your-own-system)
+- [Everything it does](#everything-it-does) and [Privacy](#privacy)
+- [Connecting it to your own system](#connecting-it-to-your-own-system), including [a ready-made receiver](#a-ready-made-receiver)
 - [How a clip is decided](#how-a-clip-is-decided)
 - [The guide format](#the-guide-format)
-- [How it is built](#how-it-is-built) and [Test](#test)
+- [How it is built](#how-it-is-built), [Test](#test) and [Redrawing the pictures](#redrawing-the-pictures)
 - [Contributing](#contributing)
 
 ## What a finished guide looks like
@@ -72,7 +77,7 @@ two to three seconds of pictures and plays them, faded one into the next.
 Every other step keeps its still picture. Nobody has to choose: the
 extension compares the pictures and decides.
 
-![A step with a clip: the menu opening](docs/clip.png)
+![A step with a clip: a card being dragged across, playing on the guide's page](docs/clip.gif)
 
 **Download as a web page** gives one HTML file with the pictures inside it.
 It looks the same and opens anywhere, with no extension and no server:
@@ -83,20 +88,44 @@ It looks the same and opens anywhere, with no extension and no server:
 |---|---|---|
 | ![Popup](docs/popup.png) | ![My guides](docs/my-guides.png) | ![Settings](docs/settings.png) |
 
-## What it does
+**On a phone**, the guide's page and the downloaded web page fit the screen,
+so a guide you send can be followed from a phone:
 
+<p><img src="docs/phone-web-page.png" width="260" alt="The downloaded web page on a phone"> &nbsp; <img src="docs/phone-guide.png" width="260" alt="The guide's page on a phone"> &nbsp; <img src="docs/phone-my-guides.png" width="260" alt="My guides on a phone"></p>
+
+## Everything it does
+
+**Making a guide**
 - **Start a guide** from the toolbar icon on the page you want to explain.
+- Every click is a step: a sentence that names what was clicked ("Click
+  "Save changes".", "Open the "Cards" tab.", "Tick "Send me the
+  newsletter".") and a picture with the clicked thing ringed.
 - A small panel on the page shows the count and the last steps, with
   **Pause**, **Undo last step** and **Finish guide**. Drag it anywhere.
 - **Follows you across tabs** if you allow it on all sites (asked once, at
   the first guide; optional). Without that, press the icon on the new tab and
   the guide carries on there.
-- **Finish** opens the guide's page: fix the title or any sentence, take a
-  step out, download it, or send it.
-- **Moving steps get a clip**, decided by the extension (see below). A drag
-  is one step ("Drag "Invoice card".") with a clip of it moving.
+- **Moving steps get a clip**, decided by the extension (see
+  [How a clip is decided](#how-a-clip-is-decided)). A drag is one step
+  ("Drag "Invoice card".") with a clip of it moving.
 - Survives a crash: every step is saved in the browser the moment it is
   taken, and a browser that closes mid-guide keeps what was clicked.
+
+**After Finish**
+- The guide opens in its own page: fix the title or any sentence, take a step
+  out, delete the guide.
+- **My guides** lists every guide with its first picture, its steps, its date
+  and whether it was sent.
+- **Download as a web page**: one HTML file with the pictures and clips
+  inside. It opens in any browser, on a computer or a phone, with no
+  extension and no server.
+- **Download as JSON** in the [`step-guide/1`](#the-guide-format) format, for
+  your own tools.
+- **Send** it to your own system, by hand or by itself on Finish (see below).
+
+**Kept private**
+- Typing is never recorded, password and card fields are painted out, and
+  clips are never taken while a field has the cursor. See [Privacy](#privacy).
 
 ## Privacy
 
@@ -146,6 +175,24 @@ myApi: {
 It then shows up in Settings. A send that fails is tried again by itself
 (after 1, 2, 4 ... minutes, up to 8 tries) and can always be sent again from
 the guide's page. The guide stays in the browser either way.
+
+The webhook also works with Zapier, Make, n8n or an Apps Script web app:
+anything that can take a JSON POST.
+
+### A ready-made receiver
+
+[`examples/webhook-server.js`](examples/webhook-server.js) is a small server
+with no dependencies that saves every guide it is sent as a folder:
+`guide.json`, one picture per step, the clip pictures, and a `README.md`
+listing the steps with their pictures.
+
+```sh
+SECRET=change-me node examples/webhook-server.js
+```
+
+In Settings choose **Webhook**, address `http://127.0.0.1:8787/guides`,
+secret `change-me`. Finished guides land in `guides/`. Use it as the starting
+point for your own system; it is not meant to face the internet as it is.
 
 ## How a clip is decided
 
@@ -226,21 +273,34 @@ Plain JavaScript, Manifest V3, no build step.
 
 ## Test
 
-An end-to-end check runs the real extension in Chromium against a small demo
-site: it makes a guide, undoes and pauses, moves between pages, opens a
-menu and drags a card (both must get a clip; field, password and still steps
-must not), finishes, checks nothing typed was kept, downloads the web page
-and sends to a local webhook.
-
 ```sh
 npm install
 npx playwright install chromium
 npm test
 ```
 
-Screenshots land in `test/out/`. Pressing the toolbar icon cannot be
-scripted, so the test loads a copy of the extension that is allowed on all
-sites and starts the guide the way the popup does.
+18 checks run the real extension in Chromium against a small demo site
+(`test/site/`): starting a guide, the panel, one step per click, Undo, a
+click while paused not kept, the panel following to another page, Finish,
+the right sentence for each step, the drag as one step, nothing typed kept,
+a clip for the menu and the drag, no clip on field, password or still steps,
+the downloaded web page opening on its own, no Send without a destination,
+and the webhook getting the whole guide with its secret. 6 more check the
+example receiver (wrong secret, wrong format, a guide saved as a folder, an
+id that tries to leave its folder).
+
+Pressing the toolbar icon cannot be scripted, so the test loads a copy of
+the extension that is allowed on all sites and starts the guide the way the
+popup does. Screenshots land in `test/out/`.
+
+## Redrawing the pictures
+
+Every picture in `docs/` and the sample guide in `examples/` come from the
+test, so they always show the extension as it is:
+
+```sh
+npm run docs        # needs Pillow: pip install Pillow
+```
 
 ## Contributing
 
@@ -252,4 +312,4 @@ between versions are in [CHANGELOG.md](CHANGELOG.md).
 
 ## Licence
 
-MIT. See [LICENSE](LICENSE).
+[MIT](LICENSE). Use it, change it, fork it, ship it in your own product.

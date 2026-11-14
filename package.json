@@ -5,7 +5,10 @@
   "description": "Chrome extension: click through a task once, get a step-by-step guide with a picture of each step.",
   "license": "MIT",
   "scripts": {
-    "test": "node test/e2e.js"
+    "test": "node test/examples.js && node test/e2e.js",
+    "test:example": "node test/examples.js",
+    "docs": "DOCS=1 node test/e2e.js && python3 scripts/make-docs.py",
+    "example:webhook": "node examples/webhook-server.js"
   },
   "devDependencies": {
     "playwright": "^1.48.0"
